@@ -1,14 +1,14 @@
 from typing import List, Dict, Optional
 
 class Tarea:
-    def __init__(self, id: str, descripcion: str, duracion: int, dependencias: Optional[List[str]] = None):
+    def __init__(self, id: str, descripcion: str, duracion: int, dependencias: Optional[List[str]], tecnicos_asignados : int):
         self.id = id
         self.descripcion = descripcion
         self.duracion = duracion
         self.dependencias = dependencias or []
         self.empezar = None
         self.terminar = None
-        self.tecnicos_asignados = 0
+        self.tecnicos_asignados = tecnicos_asignados
 
 class Tecnico:
     def __init__(self, id: int):
@@ -31,20 +31,19 @@ class CPM:
             for tarea in self.tareas.values():
                 if tarea.id in programadas:
                     continue
-                if all(dep in programadas for dep in tarea.dependencias):
+                if all(self.tareas[dep].terminar is not None and self.tareas[dep].terminar <= tiempo_actual for dep in tarea.dependencias):
                     # Resource constraints
                     if tarea.id in ['E', 'F']:
                         # Only one server recovery at a time
                         if any(t.id in ['E', 'F'] and t.empezar is not None and t.terminar > tiempo_actual for t in self.tareas.values()):
                             continue
-                    # Assign technicians
-                    needed = min(1, 1 if tarea.id in ['E', 'F'] else 3)
+                    # Asignar técnicos según lo definido en la tarea
+                    needed = tarea.tecnicos_asignados
                     tecnicos_disponibles = [t for t in self.tecnicos if t.disponible_en <= tiempo_actual]
                     if len(tecnicos_disponibles) < needed:
                         continue
                     for tecnico in tecnicos_disponibles[:needed]:
                         tecnico.disponible_en = tiempo_actual + tarea.duracion
-                    tarea.tecnicos_asignados = needed
                     tarea.empezar = tiempo_actual
                     tarea.terminar = tiempo_actual + tarea.duracion
                     programadas.add(tarea.id)
@@ -62,17 +61,17 @@ class CPM:
 
 def main():
     project = CPM(tiempo_total=120, tecnicos=3)
-    project.add_tarea(Tarea('A', 'Identificar servidores afectados', 15))
-    project.add_tarea(Tarea('B', 'Priorizar datos críticos', 20))
-    project.add_tarea(Tarea('C', 'Activar protocolo de recuperación', 10, ['A']))
-    project.add_tarea(Tarea('D', 'Asignar técnicos a servidores', 5, ['B']))
-    project.add_tarea(Tarea('E', 'Recuperar datos de servidor 1', 30, ['D']))
-    project.add_tarea(Tarea('F', 'Recuperar datos de servidor 2', 25, ['E']))
-    project.add_tarea(Tarea('G', 'Validar integridad de datos recuperados', 15, ['E', 'F']))
-    project.add_tarea(Tarea('I', 'Comunicar a clientes afectados', 20, ['G']))
-    project.add_tarea(Tarea('J', 'Coordinar con equipo legal', 15, ['G']))
-    project.add_tarea(Tarea('K', 'Preparar plan de contingencia', 25, ['G']))
-    project.add_tarea(Tarea('H', 'Generar informe preliminar para dirección', 10, ['J']))
+    project.add_tarea(Tarea('A', 'Identificar servidores afectados', 15, [], 1))
+    project.add_tarea(Tarea('B', 'Priorizar datos críticos', 20, [], 1))
+    project.add_tarea(Tarea('C', 'Activar protocolo de recuperación', 10, ['A'], 1))
+    project.add_tarea(Tarea('D', 'Asignar técnicos a servidores', 5, ['B'], 1))
+    project.add_tarea(Tarea('E', 'Recuperar datos de servidor 1', 30, ['D'], 3))
+    project.add_tarea(Tarea('F', 'Recuperar datos de servidor 2', 25, ['E'], 3))
+    project.add_tarea(Tarea('G', 'Validar integridad de datos recuperados', 15, ['E', 'F'], 1))
+    project.add_tarea(Tarea('I', 'Comunicar a clientes afectados', 20, ['G'], 1))
+    project.add_tarea(Tarea('J', 'Coordinar con equipo legal', 15, ['G'], 1))
+    project.add_tarea(Tarea('K', 'Preparar plan de contingencia', 25, ['G'], 1))
+    project.add_tarea(Tarea('H', 'Generar informe preliminar para dirección', 10, ['J'], 1))
     project.programa()
     project.print_schedule()
 
