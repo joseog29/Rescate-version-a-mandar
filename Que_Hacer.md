@@ -1,32 +1,28 @@
 # Qué Hacer en los 120 Minutos Críticos
 
-## Instrucciones para el Equipo Técnico
+A las 8 de la mañana, el jefe de sistemas y los tres técnicos disponibles se percatan de una incidencia informática grave: los han atacado. 
+Como protocolo de seguridad, el sistema se reiniciará solo en 120 minutos. Por su gran experiencia, el jefe en sistemas comunica inmediatamente a su equipo lo siguiente:
 
-Durante una emergencia tecnológica, el objetivo principal es recuperar los datos críticos de pacientes médicos antes del reinicio del sistema. El siguiente plan debe ser ejecutado de manera rigurosa y coordinada para asegurar el éxito en 120 minutos:
+"Hemos detectado un ataque de ramsomware, lo más importante es recuperar los datos críticos de nuestros pacientes antes de que el sistema reinicie. Para ello, debemos seguir los siguientes pasos a pie de letra:"
 
 ### 1. Identificación y Priorización
-- Identificar de inmediato los servidores afectados.
-- Priorizar los datos críticos que deben ser recuperados primero.
+- "Primero, idetificar los servidores afectados. Imprescindible recuperar los datos **críticos** de nuestros pacientes."
 
 ### 2. Activación y Asignación
-- Activar el protocolo de recuperación de datos.
-- Asignar técnicos a las tareas según el cronograma y disponibilidad, permitiendo hasta tres actividades simultáneas.
+- "Luego, uno de ustedes activará el protocolo de recuperación de datos, yo me encargaré de asignarlos, solo hagan lo que les pida."
 
 ### 3. Recuperación de Servidores
-- Recuperar los datos de los servidores afectados de manera secuencial, asegurando que no haya solapamiento en la restauración para evitar corrupción de datos.
+- "Una vez tengamos los servidores identificados, los recuperaremos de manera secuencial, es primordial ser eficientes en los primeros pasos, ya que solo se puede recuperar un servidor a la vez."
 
 ### 4. Validación y Comunicación
-- Validar la integridad de los datos recuperados.
-- Generar un informe preliminar para la dirección.
-- Comunicar a los clientes afectados sobre el estado de la recuperación.
-- Coordinar con el equipo legal para cualquier acción necesaria.
-- Preparar y activar el plan de contingencia si es requerido.
+- "Nos encargaremos de validar la integridad de los datos que recuperemos, comunicaremos a nuestros clientes el estado de sus datos."
+- "Generaremos un informe preeliminar, con el objetivo de enviarlo pronto a dirección, hasta que sepamos más del ataque."
+- "Contactaremos con el equipo legal y que nos asesoren sobre las acciones necesarias.
+- "Si es necesario, prepararemos el plan de contigencia."
 
 ### 5. Coordinación y Reporte
-- Mantener comunicación constante entre los técnicos y la dirección.
-- Documentar cada paso realizado y cualquier incidencia.
-- Finalizar el proceso asegurando que todos los datos críticos estén disponibles y seguros antes del reinicio del sistema.
+- "Es importante que mantengan la comunicación con la dirección, documentando cada paso realizado y no se callen las incidencias."
+- "Asegurarnos que los datos críticos estén disponibles y seguros."
 
 ---
 
-**Recuerda:** El tiempo es limitado y la coordinación es clave. Sigue el orden de tareas y dependencias para maximizar la eficiencia y minimizar riesgos.
